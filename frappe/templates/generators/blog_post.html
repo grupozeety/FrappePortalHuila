@@ -1,0 +1,40 @@
+{% extends "templates/web.html" %}
+
+{% block header %}
+<h1 itemprop="name headline" itemscope itemtype="http://schema.org/BlogPost">
+	{{ title }}
+</h1>
+{% endblock %}
+
+{% block breadcrumbs %}
+    {% include "templates/includes/breadcrumbs.html" %}
+{% endblock %}
+
+{% block page_content %}
+<article class="blog-content" itemscope itemtype="http://schema.org/BlogPost">
+	<!-- begin blog content -->
+	<p class="small text-muted blog-info">
+		<span itemprop="author">{{ blogger_info and blogger_info.full_name or full_name }}</span>,
+		<span itemprop="dateCreated">{{ updated }}</span>
+    </p>
+	<div itemprop="articleBody" class="longform blog-text">
+	{{ content }}
+	</div>
+    <p class="text-muted blog-category">
+        <a href="/{{ parent_website_route }}" class="no-decoration">
+            {{ _("This post is filed under {0}").format(blog_category) }}</a>
+    </p>
+	<!-- end blog content -->
+</article>
+{% if blogger_info %}
+{% include "templates/includes/blog/blogger.html" %}
+{% endif %}
+<div class="blog-comments">
+	<h2>Comments</h2>
+	{% include 'templates/includes/comments/comments.html' %}
+</div>
+
+<script>
+    frappe.ready(function() { frappe.set_search_path("/blog"); })
+</script>
+{% endblock %}

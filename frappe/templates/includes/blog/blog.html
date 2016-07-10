@@ -1,0 +1,34 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ blog_title or "Blog" }}{% endblock %}
+
+{% block hero %}{% endblock %}
+
+{% block page_content %}
+<!-- no-header -->
+<!-- no-breadcrumbs -->
+{% if blog_subtitle %}
+<div class="list-hero">
+	<h1>
+		{{ blog_subtitle }}
+	</h1>
+</div>
+{% endif %}
+<div class="blog-list-content">
+	<div id="blog-list">
+		{% include "templates/includes/list/list.html" %}
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>{% include "templates/includes/list/list.js" %}</script>
+{% endblock %}
+
+{% block style %}
+<style>
+.page-content {
+	padding: 0px;
+}
+</style>
+{% endblock %}
